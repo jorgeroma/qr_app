@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'dart:io';
 
-import 'package:qr_app/src/pages/mapa_page.dart';
+import 'package:qr_app/src/models/scan_model.dart';
+import 'package:qr_app/src/bloc/scans_bloc.dart';
+import 'package:qr_app/src/utils/utils.dart' as utils;
+
 import 'direcciones_page.dart';
-
-import 'package:qr_app/src/providers/db_provider.dart';
-
+import 'package:qr_app/src/pages/mapa_page.dart';
 
 import 'package:barcode_scan/barcode_scan.dart';
 
@@ -17,6 +19,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
+  final scansBloc = new ScansBloc();
+
   int currentIndex = 0;
 
   @override
@@ -27,7 +31,7 @@ class _HomePageState extends State<HomePage> {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.delete_forever),
-            onPressed: (){},
+            onPressed: scansBloc.borrarScanTODOS,
           )
         ],
       ),
@@ -61,8 +65,18 @@ class _HomePageState extends State<HomePage> {
       print('Tenemos informacion');
 
       final scan = ScanModel(valor: futureString);
+      scansBloc.agregarScan(scan);
 
-      DBProvider.db.nuevoScan(scan);
+      final scan2 = ScanModel(valor: 'geo:36.777144753627375,-4.0955454822089905');
+      scansBloc.agregarScan(scan2);
+
+      if(Platform.isIOS){
+        Future.delayed(Duration(milliseconds: 750));
+        utils.abrirScan(scan);
+      }else{
+        utils.abrirScan(scan);
+      }
+
     }
 
   }
