@@ -58,24 +58,21 @@ class _HomePageState extends State<HomePage> {
     // http://twitter.com/jorge_ro_ma
     // geo:36.777144753627375,-4.0955454822089905
 
-    String futureString = 'http://twitter.com/jorge_ro_ma';
+    String futureString;
     
-    // try{
-    //   futureString = await BarcodeScanner.scan();
-    // }catch(e){
-    //   futureString = e.toString();
-    // }
+    try{
+      futureString = await BarcodeScanner.scan();
+    }catch(e){
+      futureString = e.toString();
+    }
 
-    // print('Future String: $futureString');
+    print('Future String: $futureString');
 
     if(futureString != null){
       print('Tenemos informacion');
 
       final scan = ScanModel(valor: futureString);
       scansBloc.agregarScan(scan);
-
-      final scan2 = ScanModel(valor: 'geo:36.777144753627375,-4.0955454822089905');
-      scansBloc.agregarScan(scan2);
 
       if(Platform.isIOS){
         Future.delayed(Duration(milliseconds: 750));
