@@ -40,13 +40,13 @@ class _HomePageState extends State<HomePage> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.filter_center_focus),
-        onPressed: _scannQR,
+        onPressed: ()=>_scannQR(context),
         backgroundColor: Theme.of(context).primaryColor,
       ),
     );
   }
 
-  _scannQR() async {
+  _scannQR(BuildContext context) async {
 
     // http://twitter.com/jorge_ro_ma
     // geo:36.777144753627375,-4.0955454822089905
@@ -72,9 +72,9 @@ class _HomePageState extends State<HomePage> {
 
       if(Platform.isIOS){
         Future.delayed(Duration(milliseconds: 750));
-        utils.abrirScan(scan);
+        utils.abrirScan(scan, context);
       }else{
-        utils.abrirScan(scan);
+        utils.abrirScan(scan, context);
       }
 
     }

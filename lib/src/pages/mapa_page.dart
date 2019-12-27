@@ -12,6 +12,9 @@ class MapasPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    scansBloc.obtenerScans();
+
     return StreamBuilder<List<ScanModel>>(
       stream: scansBloc.scansStream,
       builder: (BuildContext context, AsyncSnapshot<List<ScanModel>> snapshot) {
@@ -39,7 +42,7 @@ class MapasPage extends StatelessWidget {
               subtitle: Text('${scans[i].id}'),
               trailing: Icon(Icons.keyboard_arrow_right, color: Colors.grey,),
               onTap: (){
-                utils.abrirScan(scans[i]);
+                utils.abrirScan(scans[i], context);
               },
             ),
           ),
