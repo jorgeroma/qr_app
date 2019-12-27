@@ -48,6 +48,11 @@ class ScansBloc with Validators {
     await DBProvider.db.deleteAll();
     obtenerScans();
   }
+  
+  borrarScanTODOStipo(String tipo) async {
+    await DBProvider.db.deleteAllTipo(tipo);
+    obtenerScans();
+  }
 
 }
 

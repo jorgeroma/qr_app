@@ -120,4 +120,12 @@ class DBProvider{
     final res = await db.rawDelete('DELETE FROM Scans');
     return res;
   }
+
+  Future<int> deleteAllTipo(String tipo) async {
+
+    final db = await database;
+    final res = await db.delete('Scans',where: 'tipo = ?', whereArgs: [tipo]);
+    return res;
+  }
+
 }

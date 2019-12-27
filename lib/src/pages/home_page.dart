@@ -31,7 +31,14 @@ class _HomePageState extends State<HomePage> {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.delete_forever),
-            onPressed: scansBloc.borrarScanTODOS,
+            onPressed: (){
+              // scansBloc.borrarScanTODOS();
+              if(currentIndex==0){
+                scansBloc.borrarScanTODOStipo('geo');
+              }else{
+                scansBloc.borrarScanTODOStipo('http');
+              }
+            },
           )
         ],
       ),
